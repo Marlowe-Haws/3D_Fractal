@@ -12,7 +12,7 @@ This program becomes exponentially more computationally intensive at high values
 Keep this in mind and monitor resource usage, and/or feel free to use it as an informal stress test. 
 
 
-##Installation
+## Installation
 I created this as a Python project in Microsoft Visual Studio. 
 
 You only need 2 dependencies (and Python 3.12.8):
