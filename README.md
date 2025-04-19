@@ -1,7 +1,32 @@
-# 3D_Fractal
+# 3D_Fractal Generator
 
-A program that renders a 3D version of one of my fractal artworks.
+## Description
+A Python program that renders a 3D version of one of my fractal artworks.
 
+You may choose a value for N, which will determine the size of the image.
+
+This image is composed of cubes attached to cubes at the corners according to some complicted rules.
+
+This program becomes exponentially more computationally intensive at high values of N (7+ depending on hardware).
+
+Keep this in mind and monitor resource usage, and/or feel free to use it as an informal stress test. 
+
+
+##Installation
+I created this as a Python project in Microsoft Visual Studio. 
+
+You only need 2 dependencies (and Python 3.12.8):
+
+1. pip install matplotlib
+
+2. pip install numpy
+
+Run the 3D_Fractal_Final_Version.py file. 
+
+If you happen to also use Microsoft Visual Studio, I provided the .pyproj and .sln files. 
+
+
+## How it works
 This was a rather complex task because the rules of the fractal are complicated.
 
 The rules involve starting with a framework of size N (how many layers to add initially), where cubes of progressively larger size are added to the 8 corners of an initiator cube of size 1x1x1.
@@ -34,7 +59,10 @@ I provided reference images of the original artwork, a smaller version with colo
 
 I was able to calculate N=6, but while N=7 seemed like I was not in danger of crashing my system (my 16GB RAM was steadily at around 50%), I waited more than 30 minutes and it still hadn't rendered the image, so I stopped.
 
-You can calculate higher values at your discretion if you think your computer can handle it, or to stress test your system. 
+You can calculate higher values at your discretion if you think your computer can handle it, or to stress test your system.
+
+
+## Creative process - vibe coding
 
 I'm an aspiring coder, but this was a bit above my level. 
 
@@ -51,6 +79,9 @@ I used these settings and they seemed pretty effective: Temp: 0.3, Top K: 20, To
 These values are probably higher than what would be considered optimal, but I wanted to give it freedom for creative solutions since this was an odd project.
 
 I think this fine-tuning might have helped it for my purpose, but perhaps it would have been fine with lower values too. 
+
+
+## License
 
 I've decided to release this under the The Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0) license.
 
