@@ -13,17 +13,11 @@ Keep this in mind and monitor resource usage, and/or feel free to use it as an i
 
 
 ## Installation
-I created this as a Python project in Microsoft Visual Studio. 
+I updated this version to utilize the VisPy library for much faster visual processing times and higher quality image results with zoom/rotation capabilities.
 
-You only need 2 dependencies (and Python 3.12.8):
+The last version that used matplotlib was extremely slow when rendering the image; now that is the fastest part, and it's the NumPy calculations that take longer.
 
-1. pip install matplotlib
-
-2. pip install numpy
-
-Run the 3D_Fractal_Final_Version.py file. 
-
-If you happen to also use Microsoft Visual Studio, I provided the .pyproj and .sln files. 
+This requires more dependencies; see the updated requirements.txt file in this branch.
 
 
 ## How it works
@@ -57,9 +51,9 @@ The layering ends when you have completed a cycle through all colors without bei
 
 I provided reference images of the original artwork, a smaller version with color coding, and some of my results at various values of N.
 
-I was able to calculate N=6, but while N=7 seemed like I was not in danger of crashing my system (my 16GB RAM was steadily at around 50%), I waited more than 30 minutes and it still hadn't rendered the image, so I stopped.
+This version utilizing VisPy is vastly superior to the previous version. I was able to calculate N=10 without a very long processing time at all and my RAM was at about 60%. 
 
-You can calculate higher values at your discretion if you think your computer can handle it, or to stress test your system.
+You can probably push higher values using this version, especially if you have good hardware. I provided an image of this N=10 image for reference with a zoomed view as well. 
 
 
 ## Creative process - vibe coding
