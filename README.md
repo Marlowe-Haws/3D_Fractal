@@ -19,6 +19,8 @@ The last version that used matplotlib was extremely slow when rendering the imag
 
 This requires more dependencies; see the updated requirements.txt file in this branch.
 
+This time I used the PyCharm IDE because it seems much more convenient than Microsoft Visual Studio, so there are no longer .pyproj or .sln files. 
+
 
 ## How it works
 This was a rather complex task because the rules of the fractal are complicated.
