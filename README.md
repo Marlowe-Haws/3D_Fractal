@@ -5,24 +5,70 @@ A Python program that renders a 3D version of one of my fractal artworks.
 
 You may choose a value for N, which will determine the size of the image.
 
-This image is composed of cubes attached to cubes at the corners according to some complicted rules.
+This image is composed of cubes attached to cubes at the corners according to some complicated rules.
 
-This program becomes exponentially more computationally intensive at high values of N (7+ depending on hardware).
+This is the VisPy + Numba version. The VisPy library makes the image rendering extremely fast. 
 
-Keep this in mind and monitor resource usage, and/or feel free to use it as an informal stress test. 
+The Numba library increases the efficiency of the Numpy calculations (uses decorators to compile functions into machine code format).
+
+This version is my attempt to optimize the code to push the highest values of N possible. 
+
+I successfully computed N=13 on my computer in 3min 39s after 23 color cycles (336,320 cubes placed total).
+
+The main bottleneck issue with this program is that you have extremely large arrays keeping track of cube placement that you must reference for collision checks.
+
+I am not hitting issues with CPU or GPU, it's simply a matter of the RAM having to accommodate these very large arrays. 
+
+My RAM usage hit a peak of 76% during this calculation, while the CPU was only 16%, and the GPU had a tiny 3% spike during the image rendering (Vispy utilizes GPU). 
 
 
 ## Installation
-I updated this version to utilize the VisPy library for much faster visual processing times and higher quality image results with zoom/rotation capabilities.
+This version is the most complicated in terms of dependencies.
 
-The last version that used matplotlib was extremely slow when rendering the image; now that is the fastest part, and it's the NumPy calculations that take longer.
+I added a new requirements.txt file to this branch with the general dependencies.
 
-This requires more dependencies; see the updated requirements.txt file in this branch.
+I also added a conda environment file because I used conda to support the numba library.
 
-This time I used the PyCharm IDE because it seems much more convenient than Microsoft Visual Studio, so there are no longer .pyproj or .sln files. 
+I was using PyCharm again for this version, and I'll explain how to set it up in this IDE.
+
+First, you'll need to install Anaconda if you don't already have it, at https://www.anaconda.com/download
+
+Then you'll want to create a new project, choose custom environment, generate new, type: conda.
+
+It's best practice to create a new virtual environment specifically for this project to isolate the needed dependencies. 
+
+You'll want to choose view/tool window/terminal (or alt+f12) to open a terminal window if it's not already open at the bottom.
+
+You'll want to activate the conda powershell and activate your virtual environment:
+
+conda init powershell (you may need to restart the terminal after)
+
+conda activate (project name)
+
+Then you can add the environment.yml file I included to your project directory and use this command to install the dependencies:
+
+conda env update -f environment.yml
+
+To verify installation, you can type:
+
+conda list
+
+To check if it matches the dependencies listed in the .yml file. 
 
 
 ## How it works
+
+### Numba version update: 
+
+I removed a filter that would prohibit more than 2 cubes touching at a single vertex to make the numba implementation work better.
+
+This has changed the behavior of the pattern a little where some irregularities can emerge if a cube adds a cube in the available space before another cube gets the chance to do so.
+
+For example, there are 2 2x2x2 cubes next to each other which are equidistant from the origin, but one was added to the list before the other, and it gets to build a 3x3x3 cube in the available space, but this prevents the other cube from doing so.
+
+These irregularities detract from the "perfect symmetry", but they also make the pattern more dynamic, and it was better for the purpose of optimizing processing speed, so I left it that way. 
+----update---
+
 This was a rather complex task because the rules of the fractal are complicated.
 
 The rules involve starting with a framework of size N (how many layers to add initially), where cubes of progressively larger size are added to the 8 corners of an initiator cube of size 1x1x1.
