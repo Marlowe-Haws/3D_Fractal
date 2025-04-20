@@ -19,8 +19,9 @@ The main bottleneck issue with this program is that you have extremely large arr
 
 I am not hitting issues with CPU or GPU, it's simply a matter of the RAM having to accommodate these very large arrays. 
 
-My RAM usage hit a peak of 76% during this calculation, while the CPU was only 16%, and the GPU had a tiny 3% spike during the image rendering (Vispy utilizes GPU). 
+My RAM usage hit a peak of 76% during this calculation, while the CPU was only 16%, and the GPU had a tiny 3% spike during the image rendering (Vispy utilizes GPU).
 
+I added some images showcasing some of the results of these high N values. 
 
 ## Installation
 This version is the most complicated in terms of dependencies.
