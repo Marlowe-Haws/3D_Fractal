@@ -5,6 +5,7 @@ This version is incomplete. I'm experimenting with optimization, and this is jus
 I was encountering a RAM limit, so I am altering logic for efficiency and may implement CuPy for GPU acceleration. 
 
 --Update 1--
+
 This is now the best version I have, and I'm still improving it. 
 
 I made a silly error checking for orange on red blocks in the first cycle in previous versions; you should start with yellow on orange blocks because that's the first cycle where blocks can be placed. 
@@ -36,6 +37,17 @@ Rather than it seeming like the primary growth is from the center outward, there
 This variation on the fractal was a side-effect of my goal of maximizing computing speed, and I don't think it really detracts from the beauty of the fractal; it's just a variation. 
 
 --End update 1--
+
+--Update 2--
+
+I've uploaded a working CUDA version. It is not optimized yet, but it functions. 
+
+I'm working on reducing the overhead time of converting CPU batches of information to GPU batches.
+
+I've added an input for size of batches, and total processing time stamps to help with testing. 
+
+I'm hoping this approach will eventually pay off and exceed all my previous versions. 
+
 
 ## License
 
