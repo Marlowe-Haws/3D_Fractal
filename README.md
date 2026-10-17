@@ -5,28 +5,71 @@ A Python program that renders a 3D version of one of my fractal artworks.
 
 You may choose a value for N, which will determine the size of the image.
 
-This image is composed of cubes attached to cubes at the corners according to some complicted rules.
+This image is composed of cubes attached to cubes at the corners according to some complicated rules.
 
-This program becomes exponentially more computationally intensive at high values of N (7+ depending on hardware).
+This is the VisPy + Numba version. The VisPy library makes the image rendering extremely fast. 
 
-Keep this in mind and monitor resource usage, and/or feel free to use it as an informal stress test. 
+The Numba library increases the efficiency of the Numpy calculations (uses decorators to compile functions into machine code format).
 
+This version is my attempt to optimize the code to push the highest values of N possible. 
+
+I successfully computed N=13 on my computer in 3min 39s after 23 color cycles (336,320 cubes placed total).
+
+The main bottleneck issue with this program is that you have extremely large arrays keeping track of cube placement that you must reference for collision checks.
+
+I am not hitting issues with CPU or GPU, it's simply a matter of the RAM having to accommodate these very large arrays. 
+
+My RAM usage hit a peak of 76% during this calculation, while the CPU was only 16%, and the GPU had a tiny 3% spike during the image rendering (Vispy utilizes GPU).
+
+I added some images showcasing some of the results of these high N values. 
 
 ## Installation
-I created this as a Python project in Microsoft Visual Studio. 
+This version is the most complicated in terms of dependencies.
 
-You only need 2 dependencies (and Python 3.12.8):
+I added a new requirements.txt file to this branch with the general dependencies.
 
-1. pip install matplotlib
+I also added a conda environment file because I used conda to support the numba library.
 
-2. pip install numpy
+I was using PyCharm again for this version, and I'll explain how to set it up in this IDE.
 
-Run the 3D_Fractal_Final_Version.py file. 
+First, you'll need to install Anaconda if you don't already have it, at https://www.anaconda.com/download
 
-If you happen to also use Microsoft Visual Studio, I provided the .pyproj and .sln files. 
+Then you'll want to create a new project, choose custom environment, generate new, type: conda.
+
+It's best practice to create a new virtual environment specifically for this project to isolate the needed dependencies. 
+
+You'll want to choose view/tool window/terminal (or alt+f12) to open a terminal window if it's not already open at the bottom.
+
+You'll want to activate the conda powershell and activate your virtual environment:
+
+conda init powershell (you may need to restart the terminal after)
+
+conda activate (project name)
+
+Then you can add the environment.yml file I included to your project directory and use this command to install the dependencies:
+
+conda env update -f environment.yml
+
+To verify installation, you can type:
+
+conda list
+
+To check if it matches the dependencies listed in the .yml file. 
 
 
 ## How it works
+
+### Numba version update: 
+
+I removed a filter that would prohibit more than 2 cubes touching at a single vertex to make the numba implementation work better.
+
+This has changed the behavior of the pattern a little where some irregularities can emerge if a cube adds a cube in the available space before another cube gets the chance to do so.
+
+For example, there are 2 2x2x2 cubes next to each other which are equidistant from the origin, but one was added to the list before the other, and it gets to build a 3x3x3 cube in the available space, but this prevents the other cube from doing so.
+
+These irregularities detract from the "perfect symmetry", but they also make the pattern more dynamic, and it was better for the purpose of optimizing processing speed, so I left it that way. 
+----update---
+
 This was a rather complex task because the rules of the fractal are complicated.
 
 The rules involve starting with a framework of size N (how many layers to add initially), where cubes of progressively larger size are added to the 8 corners of an initiator cube of size 1x1x1.
@@ -57,9 +100,9 @@ The layering ends when you have completed a cycle through all colors without bei
 
 I provided reference images of the original artwork, a smaller version with color coding, and some of my results at various values of N.
 
-I was able to calculate N=6, but while N=7 seemed like I was not in danger of crashing my system (my 16GB RAM was steadily at around 50%), I waited more than 30 minutes and it still hadn't rendered the image, so I stopped.
+This version utilizing VisPy is vastly superior to the previous version. I was able to calculate N=10 without a very long processing time at all and my RAM was at about 60%. 
 
-You can calculate higher values at your discretion if you think your computer can handle it, or to stress test your system.
+You can probably push higher values using this version, especially if you have good hardware. I provided an image of this N=10 image for reference with a zoomed view as well. 
 
 
 ## Creative process - vibe coding
